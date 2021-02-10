@@ -1,0 +1,37 @@
+body {
+    background-color: #1e1e1e;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: bisque;
+    margin: 20px 0;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.caixa {
+    margin: 5px;
+    width: 70px;
+    height: 70px;
+    border: 1px solid bisque;
+}
+/* 
+.imagem1 {
+    width: 70px;
+    height: 70px;
+} */
+
+.imagem1.tamanho {
+    width: 70px;
+    height: 70px;
+}
+
+
