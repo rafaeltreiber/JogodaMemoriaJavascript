@@ -1,80 +1,13 @@
-const positions = [
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-];
-
-const revealed = [
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-];
+const match = {
+    positions: [], 
+    revealed: [],
+    firstAttempt: true,
+    firstAttemptValue: 0,
+    firstAttemptPosition: 0,    
+    secondAttemptPosition: 0,
+    attempts: 0,
+    soundFinished: true
+}
 
 const image1 = document.querySelector(".imagem1");
 image1.style.width = "70px";
@@ -243,264 +176,314 @@ function generateMatrix() {
       position = Math.round(Math.random() * 36);
 
       // Enquanto não achar uma posição sem nenhum número gravado ainda, sorteie um novo número
-      while (positions[position] != 0)
+      while (match.positions[position] != 0)
         position = Math.round(Math.random() * 36);
 
       // Agora que achamos uma posição vazia, gravamos o número atual nela
-      positions[position] = a;
+      match.positions[position] = a;
     }
-  }
+  } 
 }
 
 function getdrawingImage(value) {
- 
-      switch (revealed[value])
-      {
-        case false:
-            return './img/interrogacao.jpg';
-        case true:
-            return getImageName(positions[value]);
-      }
- 
+  switch (match.revealed[value]) {
+    case false:
+      return "./img/interrogacao.jpg";
+    case true:
+      return getImageName(match.positions[value]);
+  }
 }
 
 function getImageName(value) {
-    switch (value) {
-        case 0:
-            return './img/aguia.jpg';
-        case 1:
-            return './img/alce.jpg';
-        case 2:
-            return './img/bode.jpg';
-        case 3:
-            return './img/cachorro.png';
-        case 4:
-            return './img/cavalo.jpg';
-        case 5:
-            return './img/coruja.jpg';
-        case 6:
-            return './img/gato.jpg';
-        case 7:
-            return './img/girafa.jpg';
-        case 8:
-            return './img/golfinho.jpg';
-        case 9:
-            return './img/jacare.jpg';
-        case 10:
-            return './img/leao.jpg';
-        case 11:
-            return './img/macaco.jpg';
-        case 12:
-            return './img/panda.jpg';
-        case 13:
-            return './img/pavao.jpg';
-        case 14:
-            return './img/pombo.jpg';
-        case 15:
-            return './img/urso.jpg';
-        case 16:
-            return './img/vaca.jpg';
-        case 17:
-            return './img/zebra.jpg';
-    }
+  switch (value) {
+    case 0:
+      return "./img/aguia.jpg";
+    case 1:
+      return "./img/alce.jpg";
+    case 2:
+      return "./img/bode.jpg";
+    case 3:
+      return "./img/cachorro.png";
+    case 4:
+      return "./img/cavalo.jpg";
+    case 5:
+      return "./img/coruja.jpg";
+    case 6:
+      return "./img/gato.jpg";
+    case 7:
+      return "./img/girafa.jpg";
+    case 8:
+      return "./img/golfinho.jpg";
+    case 9:
+      return "./img/jacare.jpg";
+    case 10:
+      return "./img/leao.jpg";
+    case 11:
+      return "./img/macaco.jpg";
+    case 12:
+      return "./img/panda.jpg";
+    case 13:
+      return "./img/pavao.jpg";
+    case 14:
+      return "./img/pombo.jpg";
+    case 15:
+      return "./img/urso.jpg";
+    case 16:
+      return "./img/vaca.jpg";
+    case 17:
+      return "./img/zebra.jpg";
+  }
 }
 
-function populateImgSrcs()
-{
-    image1.src = getdrawingImage(0);
-    image2.src = getdrawingImage(1);
-    image3.src = getdrawingImage(2);
-    image4.src = getdrawingImage(3);
-    image5.src = getdrawingImage(4);
-    image6.src = getdrawingImage(5);
-    image7.src = getdrawingImage(6);
-    image8.src = getdrawingImage(7);
-    image9.src = getdrawingImage(8);
-    image10.src = getdrawingImage(9);
-    image11.src = getdrawingImage(10);
-    image12.src = getdrawingImage(11);
-    image13.src = getdrawingImage(12);
-    image14.src = getdrawingImage(13);
-    image15.src = getdrawingImage(14);
-    image16.src = getdrawingImage(15);
-    image17.src = getdrawingImage(16);
-    image18.src = getdrawingImage(17);
-    image19.src = getdrawingImage(18);
-    image20.src = getdrawingImage(19);
-    image21.src = getdrawingImage(20);
-    image22.src = getdrawingImage(21);
-    image23.src = getdrawingImage(22);
-    image24.src = getdrawingImage(23);
-    image25.src = getdrawingImage(24);
-    image26.src = getdrawingImage(25);
-    image27.src = getdrawingImage(26);
-    image28.src = getdrawingImage(27);
-    image29.src = getdrawingImage(28);
-    image30.src = getdrawingImage(29);
-    image31.src = getdrawingImage(30);
-    image32.src = getdrawingImage(31);
-    image33.src = getdrawingImage(32);
-    image34.src = getdrawingImage(33);
-    image35.src = getdrawingImage(34);
-    image36.src = getdrawingImage(35);   
+function populateImgSrcs() {
+  image1.src = getdrawingImage(0);
+  image2.src = getdrawingImage(1);
+  image3.src = getdrawingImage(2);
+  image4.src = getdrawingImage(3);
+  image5.src = getdrawingImage(4);
+  image6.src = getdrawingImage(5);
+  image7.src = getdrawingImage(6);
+  image8.src = getdrawingImage(7);
+  image9.src = getdrawingImage(8);
+  image10.src = getdrawingImage(9);
+  image11.src = getdrawingImage(10);
+  image12.src = getdrawingImage(11);
+  image13.src = getdrawingImage(12);
+  image14.src = getdrawingImage(13);
+  image15.src = getdrawingImage(14);
+  image16.src = getdrawingImage(15);
+  image17.src = getdrawingImage(16);
+  image18.src = getdrawingImage(17);
+  image19.src = getdrawingImage(18);
+  image20.src = getdrawingImage(19);
+  image21.src = getdrawingImage(20);
+  image22.src = getdrawingImage(21);
+  image23.src = getdrawingImage(22);
+  image24.src = getdrawingImage(23);
+  image25.src = getdrawingImage(24);
+  image26.src = getdrawingImage(25);
+  image27.src = getdrawingImage(26);
+  image28.src = getdrawingImage(27);
+  image29.src = getdrawingImage(28);
+  image30.src = getdrawingImage(29);
+  image31.src = getdrawingImage(30);
+  image32.src = getdrawingImage(31);
+  image33.src = getdrawingImage(32);
+  image34.src = getdrawingImage(33);
+  image35.src = getdrawingImage(34);
+  image36.src = getdrawingImage(35);
 }
+
+const rightAudio = document.querySelector(".right");
+const wrongAudio = document.querySelector(".wrong");
+
+rightAudio.addEventListener("ended", () => { 
+    match.soundFinished = true;
+});
+
+wrongAudio.addEventListener("ended", () => {   
+
+    match.revealed[match.firstAttemptPosition] = false;   
+    match.revealed[match.secondAttemptPosition] = false;   
+    populateImgSrcs(); 
+    match.soundFinished = true;
+});
 
 function revealImage(value) {
-    revealed[value] = true;
+
+    if (match.revealed[value] || !match.soundFinished) return;
+
+    match.revealed[value] = true; 
     populateImgSrcs();
+
+  if (match.firstAttempt) { 
+    match.firstAttempt = false;
+    match.firstAttemptValue = match.positions[value];
+    match.firstAttemptPosition = value;  
+    return;
+  } else {
+      match.secondAttemptPosition = value;
+      match.firstAttempt = true;
+      match.attempts++;
+      match.soundFinished = false;
+      
+    if (match.positions[value] == match.positions[match.firstAttemptPosition]) {     
+        rightAudio.play();
+    } else {  
+      wrongAudio.play();
+    }
+    
+    verifyFinish();
+  }
 }
 
-// function temp() {
-//     for (let a = 0; a < 36; a++)
-//     revealed[a] = true;
-//     console.log(positions);
-// }
+const finishMessage = document.querySelector('.finishMessage');
 
-// temp();
+function verifyFinish() {
+    let finish = 0;
+    for (let a = 0; a < 36; a++) {
+        if (match.revealed[a] == false) finish++;
+    }
 
-image1.addEventListener('click', () => {
-    revealImage(0);
+    if (finish > 0)
+    return;
+
+    finishMessage.innerText = `Parabéns, você venceu após ${match.attempts} tentativas!`;
+}
+
+image1.addEventListener("click", () => {
+  revealImage(0);
 });
 
-image2.addEventListener('click', () => {
-    revealImage(1);
+image2.addEventListener("click", () => {
+  revealImage(1);
 });
 
-image3.addEventListener('click', () => {
-    revealImage(2);
+image3.addEventListener("click", () => {
+  revealImage(2);
 });
 
-image4.addEventListener('click', () => {
-    revealImage(3);
+image4.addEventListener("click", () => {
+  revealImage(3);
 });
 
-image5.addEventListener('click', () => {
-    revealImage(4);
+image5.addEventListener("click", () => {
+  revealImage(4);
 });
 
-image6.addEventListener('click', () => {
-    revealImage(5);
+image6.addEventListener("click", () => {
+  revealImage(5);
 });
 
-image7.addEventListener('click', () => {
-    revealImage(6);
+image7.addEventListener("click", () => {
+  revealImage(6);
 });
 
-image8.addEventListener('click', () => {
-    revealImage(7);
+image8.addEventListener("click", () => {
+  revealImage(7);
 });
 
-image9.addEventListener('click', () => {
-    revealImage(8);
+image9.addEventListener("click", () => {
+  revealImage(8);
 });
 
-image10.addEventListener('click', () => {
-    revealImage(9);
+image10.addEventListener("click", () => {
+  revealImage(9);
 });
 
-image11.addEventListener('click', () => {
-    revealImage(10);
+image11.addEventListener("click", () => {
+  revealImage(10);
 });
 
-image12.addEventListener('click', () => {
-    revealImage(11);
+image12.addEventListener("click", () => {
+  revealImage(11);
 });
 
-image13.addEventListener('click', () => {
-    revealImage(12);
+image13.addEventListener("click", () => {
+  revealImage(12);
 });
 
-image14.addEventListener('click', () => {
-    revealImage(13);
+image14.addEventListener("click", () => {
+  revealImage(13);
 });
 
-image15.addEventListener('click', () => {
-    revealImage(14);
+image15.addEventListener("click", () => {
+  revealImage(14);
 });
 
-image16.addEventListener('click', () => {
-    revealImage(15);
+image16.addEventListener("click", () => {
+  revealImage(15);
 });
 
-image17.addEventListener('click', () => {
-    revealImage(16);
+image17.addEventListener("click", () => {
+  revealImage(16);
 });
 
-image18.addEventListener('click', () => {
-    revealImage(17);
+image18.addEventListener("click", () => {
+  revealImage(17);
 });
 
-image19.addEventListener('click', () => {
-    revealImage(18);
+image19.addEventListener("click", () => {
+  revealImage(18);
 });
 
-image20.addEventListener('click', () => {
-    revealImage(19);
+image20.addEventListener("click", () => {
+  revealImage(19);
 });
 
-image21.addEventListener('click', () => {
-    revealImage(20);
+image21.addEventListener("click", () => {
+  revealImage(20);
 });
 
-image22.addEventListener('click', () => {
-    revealImage(21);
+image22.addEventListener("click", () => {
+  revealImage(21);
 });
 
-image23.addEventListener('click', () => {
-    revealImage(22);
+image23.addEventListener("click", () => {
+  revealImage(22);
 });
 
-image24.addEventListener('click', () => {
-    revealImage(23);
+image24.addEventListener("click", () => {
+  revealImage(23);
 });
 
-image25.addEventListener('click', () => {
-    revealImage(24);
+image25.addEventListener("click", () => {
+  revealImage(24);
 });
 
-image26.addEventListener('click', () => {
-    revealImage(25);
+image26.addEventListener("click", () => {
+  revealImage(25);
 });
 
-image27.addEventListener('click', () => {
-    revealImage(26);
+image27.addEventListener("click", () => {
+  revealImage(26);
 });
 
-image28.addEventListener('click', () => {
-    revealImage(27);
+image28.addEventListener("click", () => {
+  revealImage(27);
 });
 
-image29.addEventListener('click', () => {
-    revealImage(28);
+image29.addEventListener("click", () => {
+  revealImage(28);
 });
 
-image30.addEventListener('click', () => {
-    revealImage(29);
+image30.addEventListener("click", () => {
+  revealImage(29);
 });
 
-image31.addEventListener('click', () => {
-    revealImage(30);
+image31.addEventListener("click", () => {
+  revealImage(30);
 });
 
-image32.addEventListener('click', () => {
-    revealImage(31);
+image32.addEventListener("click", () => {
+  revealImage(31);
 });
 
-image33.addEventListener('click', () => {
-    revealImage(32);
+image33.addEventListener("click", () => {
+  revealImage(32);
 });
 
-image34.addEventListener('click', () => {
-    revealImage(33);
+image34.addEventListener("click", () => {
+  revealImage(33);
 });
 
-image35.addEventListener('click', () => {
-    revealImage(34);
+image35.addEventListener("click", () => {
+  revealImage(34);
 });
 
-image36.addEventListener('click', () => {
-    revealImage(35);
+image36.addEventListener("click", () => {
+  revealImage(35);
 });
 
+function init() {
+    for (let a = 0; a < 36; a++) {
+        match.positions[a] = 0;
+        match.revealed[a] = false;
+    }   
+}
+
+
+
+init();
 generateMatrix();
 populateImgSrcs();
