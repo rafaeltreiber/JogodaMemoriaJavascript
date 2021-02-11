@@ -34,13 +34,27 @@ body {
     height: 70px;
 }
 
-.finishMessage {
+.footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+}
+
+.finishMessage {    
     font-size: 22px;
     color: bisque;
-    margin: 10px 0px;
+    margin: 30px 0px;
+}
+
+.playAgain {    
+    width: 150px;
+    height: 50px;
+    background-color: bisque;
+    color: black;
+    border-radius: 5px;
+    margin: 20px 0px 10px 0px;
+    display: none;
 }
 
 

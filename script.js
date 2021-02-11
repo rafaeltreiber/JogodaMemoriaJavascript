@@ -1,13 +1,13 @@
 const match = {
-    positions: [], 
-    revealed: [],
-    firstAttempt: true,
-    firstAttemptValue: 0,
-    firstAttemptPosition: 0,    
-    secondAttemptPosition: 0,
-    attempts: 0,
-    soundFinished: true
-}
+  positions: [],
+  revealed: [],
+  firstAttempt: true,
+  firstAttemptValue: 0,
+  firstAttemptPosition: 0,
+  secondAttemptPosition: 0,
+  attempts: 0,
+  soundFinished: true,
+};
 
 const image1 = document.querySelector(".imagem1");
 image1.style.width = "70px";
@@ -182,7 +182,7 @@ function generateMatrix() {
       // Agora que achamos uma posição vazia, gravamos o número atual nela
       match.positions[position] = a;
     }
-  } 
+  }
 }
 
 function getdrawingImage(value) {
@@ -277,58 +277,61 @@ function populateImgSrcs() {
 const rightAudio = document.querySelector(".right");
 const wrongAudio = document.querySelector(".wrong");
 
-rightAudio.addEventListener("ended", () => { 
-    match.soundFinished = true;
+rightAudio.addEventListener("ended", () => {
+  match.soundFinished = true;
 });
 
-wrongAudio.addEventListener("ended", () => {   
-
-    match.revealed[match.firstAttemptPosition] = false;   
-    match.revealed[match.secondAttemptPosition] = false;   
-    populateImgSrcs(); 
-    match.soundFinished = true;
+wrongAudio.addEventListener("ended", () => {
+  match.revealed[match.firstAttemptPosition] = false;
+  match.revealed[match.secondAttemptPosition] = false;
+  populateImgSrcs();
+  match.soundFinished = true;
 });
 
 function revealImage(value) {
+  if (match.revealed[value] || !match.soundFinished) return;
 
-    if (match.revealed[value] || !match.soundFinished) return;
+  match.revealed[value] = true;
+  populateImgSrcs();
 
-    match.revealed[value] = true; 
-    populateImgSrcs();
-
-  if (match.firstAttempt) { 
+  if (match.firstAttempt) {
     match.firstAttempt = false;
     match.firstAttemptValue = match.positions[value];
-    match.firstAttemptPosition = value;  
+    match.firstAttemptPosition = value;
     return;
   } else {
-      match.secondAttemptPosition = value;
-      match.firstAttempt = true;
-      match.attempts++;
-      match.soundFinished = false;
-      
-    if (match.positions[value] == match.positions[match.firstAttemptPosition]) {     
-        rightAudio.play();
-    } else {  
+    match.secondAttemptPosition = value;
+    match.firstAttempt = true;
+    match.attempts++;
+    match.soundFinished = false;
+
+    if (match.positions[value] == match.positions[match.firstAttemptPosition]) {
+      rightAudio.play();
+    } else {
       wrongAudio.play();
     }
-    
+
     verifyFinish();
   }
 }
 
-const finishMessage = document.querySelector('.finishMessage');
+const finishMessage = document.querySelector(".finishMessage");
+const replayButton = document.querySelector(".playAgain");
+replayButton.addEventListener("click", () => {
+  init();  
+});
 
 function verifyFinish() {
-    let finish = 0;
-    for (let a = 0; a < 36; a++) {
-        if (match.revealed[a] == false) finish++;
-    }
+  let finish = 0;
+  for (let a = 0; a < 36; a++) {
+    if (match.revealed[a] == false) finish++;
+  }
 
-    if (finish > 0)
-    return;
+  if (finish > 0) return;
 
-    finishMessage.innerText = `Parabéns, você venceu após ${match.attempts} tentativas!`;
+  finishMessage.innerText = `Parabéns, você venceu após ${match.attempts} tentativas!`;
+  finishMessage.style.display = "inline";
+  replayButton.style.display = "inline";
 }
 
 image1.addEventListener("click", () => {
@@ -475,15 +478,24 @@ image36.addEventListener("click", () => {
   revealImage(35);
 });
 
+function setup() {
+  for (let a = 0; a < 36; a++) {
+    match.positions[a] = 0;
+    match.revealed[a] = false;
+  }
+  match.attempts = 0;
+  match.firstAttempt = true;
+  match.firstAttemptPosition = 0;
+  match.firstAttemptValue = 0;
+  match.secondAttemptPosition = 0;
+  match.soundFinished = true;
+  replayButton.style.display = "none";
+  finishMessage.style.display = "none";
+}
 function init() {
-    for (let a = 0; a < 36; a++) {
-        match.positions[a] = 0;
-        match.revealed[a] = false;
-    }   
+  setup();
+  generateMatrix();
+  populateImgSrcs();
 }
 
-
-
 init();
-generateMatrix();
-populateImgSrcs();
